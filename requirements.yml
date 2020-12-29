@@ -1,0 +1,10 @@
+---
+- src: ryandaniels.create_users
+- src: willshersystems.sshd
+- src: nephelaiio.devtools
+- src: oefenweb.ufw
+- src: geerlingguy.ntp
+- src: anxs.hostname
+- src: oefenweb.sysctl
+- src: andrewrothstein.go
+- src: zzet.rbenv

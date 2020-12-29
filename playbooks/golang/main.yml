@@ -1,0 +1,37 @@
+---
+- hosts: all
+  become: yes
+  
+  vars_files:
+    - ../../vars/golang.yml
+  
+  roles:
+  - ../../roles/andrewrothstein.go
+  
+  tasks:
+    - name: create the go/src/github.com dir
+      file:
+        path: "{{go_user_path}}/src/github.com"
+        state: directory
+      when: go_user_path is defined
+    
+    - name: check if the go/src/github.com dir exists
+      stat:
+        path: "{{go_user_path}}/src/github.com"
+      register: user_go_dir
+
+    - name: chown go dir to correct user
+      file:
+        path: "{{go_user_path}}"
+        owner: "{{user_account_name}}"
+        group: "{{user_account_name}}"
+        mode: u=rwX,g=rX,o=rX
+        recurse: yes
+      when: user_account_name is defined and user_account_name != 'root' and user_go_dir.stat.exists and user_go_dir.stat.isdir
+
+    - name: create .bash_profile for user account and set go environment variables
+      template:
+        src: ../../templates/profile/bash_profile.j2
+        dest: "{{user_account_path}}/.bash_profile"
+        mode: 0644
+      when: user_account_name is defined and user_account_name != 'root' and user_go_dir.stat.exists and user_go_dir.stat.isdir

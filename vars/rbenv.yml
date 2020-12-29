@@ -1,0 +1,13 @@
+---
+rbenv:
+  env: user
+  version: v1.1.2
+  default_ruby: 3.0.0
+  rubies:
+    - version: 3.0.0
+
+rbenv_users:
+  - "{{ user_account_name | default('deploy') }}"
+
+#rbenv_owner: "{{ user_account_name | default('deploy') }}"
+#rbenv_group: "{{ user_account_name | default('deploy') }}"

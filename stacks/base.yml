@@ -1,0 +1,9 @@
+---
+- import_playbook: ../playbooks/apt/main.yml
+- import_playbook: ../playbooks/sys/main.yml
+- import_playbook: ../playbooks/hostname/main.yml
+- import_playbook: ../playbooks/sshd/main.yml
+- import_playbook: ../playbooks/ntp/main.yml
+- import_playbook: ../playbooks/build/main.yml
+- import_playbook: ../playbooks/ufw/main.yml
+- import_playbook: ../playbooks/users/main.yml

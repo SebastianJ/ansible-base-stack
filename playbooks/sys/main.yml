@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: yes
+  
+  vars_files:
+    - ../../vars/sys.yml
+  
+  roles:
+  - ../../roles/oefenweb.sysctl
+  
+  tasks:
+    - name: configure root user system settings, file descriptors and number of threads
+      pam_limits:
+        domain: root
+        limit_type: "{{ item.limit_type }}"
+        limit_item: "{{ item.limit_item }}"
+        value: "{{ item.value }}"
+      with_items: "{{ pam_settings }}"
+    
+    - name: configure user account system settings, file descriptors and number of threads
+      pam_limits:
+        domain: "{{ user_account_name }}"
+        limit_type: "{{ item.limit_type }}"
+        limit_item: "{{ item.limit_item }}"
+        value: "{{ item.value }}"
+      with_items: "{{ pam_settings }}"
+      when: user_account_name is defined and user_account_name != 'root'
+    
+    - name: reload settings from all system configuration files
+      shell: sysctl --system

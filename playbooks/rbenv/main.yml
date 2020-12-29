@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  
+  vars_files:
+    - ../../vars/rbenv.yml
+  
+  roles:
+    - role: zzet.rbenv
+      become: yes
+      sudo: yes

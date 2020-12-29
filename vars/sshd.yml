@@ -1,0 +1,6 @@
+---
+sshd_skip_defaults: false
+sshd:
+  Port: "{{ ssh_port | default(22) }}"
+  PermitRootLogin: no
+  PasswordAuthentication: no

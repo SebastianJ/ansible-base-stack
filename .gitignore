@@ -1,0 +1,13 @@
+.vagrant
+.vaultpass
+.retry
+vars/secret
+secret
+*.secret
+roles
+
+inventories/*
+!inventories/example/
+!inventories/vagrant/
+
+.DS_Store

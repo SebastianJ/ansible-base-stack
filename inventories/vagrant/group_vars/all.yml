@@ -1,0 +1,4 @@
+---
+ssh_port: 1337
+user_account_name: deploy
+user_account_path: "/home/{{user_account_name}}"
